@@ -1,0 +1,88 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-form/iron-form.html">
+<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+
+<!--
+`ct-sign-up`
+User sign up form
+
+@demo demo/index.html 
+-->
+
+<dom-module id="ct-sign-up">
+  <template>
+    <style include="iron-flex iron-flex-alignment sign-up-style">
+      :host {
+        display: block;
+      }
+      div[title] {
+        text-align: center;
+      }
+      paper-material {
+        padding: 15px;
+        margin: 15px;
+        min-width: 340px;
+      }
+      paper-button {
+        padding: 10px;
+        margin: 10px;
+      }
+      #errorMessage {
+        color: firebrick;
+      }
+    </style>
+
+    <div title>
+      <img class="domain-logo" src="[[ _domainLogo ]]" alt="[[ domainName ]]">
+      <p class="title">Welcome</p>
+    </div>
+
+    <div class="horizontal center-justified layout">
+      <paper-material class="box" elevation="1">
+        <form is="iron-form" id="form" method="post" action="/sign-up">
+          <paper-input name="app_id" label="Domain ID" value="[[ appId ]]" required hidden></paper-input>
+          <paper-input name="domain_id" label="Domain ID" value="[[ domainId ]]" required hidden></paper-input>
+          <paper-input id="username" name="username" label="Username" value="{{ _username }}" required auto-validate error-message=""></paper-input>
+          <paper-input id="password" name="password" label="Password" value="{{ _password }}" required auto-validate error-message=""></paper-input>
+          <paper-input id="confirmPassword" label="Confirm Password" required auto-validate error-message=""></paper-input>
+          <paper-input id="firstName" name="first_name" label="First name" required auto-validate error-message=""></paper-input>
+          <paper-input id="lastName" name="surname" label="Last name" required auto-validate error-message=""></paper-input>
+          <paper-input id="email" name="email" label="Email"></paper-input>
+          <paper-input id="mobile" name="mobile" label="Mobile Number"></paper-input>
+          <div class="horizontal center-justified layout">
+            <paper-button class="sign-up-button" raised on-tap="signUp" id="signUpBtn">Sign up</paper-button>
+          </div>
+        </form>
+        <p id="errorMessage" hidden></p>
+      </paper-material>
+    </div>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'ct-sign-up',
+
+      properties: {
+        appId: String,
+        domainId: String,
+        domainName: String,
+        next: String
+      },
+
+      listeners: {
+        'iron-form-error': 'whenSignUpFailed',
+        'iron-form-response': 'whenSignedUp'
+      },
+
+      ready: function() {
+        this._domainLogo = 'http://resource.centular.com/' + this.domainId + '/logo.jpg';
+      },
+
+    });
+  </script>
+</dom-module>
