@@ -42,23 +42,23 @@ User sign up form
 
     <div class="horizontal center-justified layout sign-up-style">
       <paper-material class="box" elevation="1">
-        <form is="iron-form" id="form" method="post" action="/sign-up">
-          <paper-input name="client_id" label="Domain ID" value="[[ clientId ]]" required hidden></paper-input>
-          <paper-input name="domain_id" label="Domain ID" value="[[ domainId ]]" required hidden></paper-input>
-          <paper-input class="input-box" id="username" name="username" label="Username" value="{{ _username }}" required auto-validate error-message=""></paper-input>
-          <paper-input class="input-box" id="password" name="password" label="Password" value="{{ _password }}" required auto-validate error-message=""></paper-input>
-          <paper-input class="input-box" id="confirmPassword" label="Confirm Password" required auto-validate error-message=""></paper-input>
-          <paper-input class="input-box" id="firstName" name="first_name" label="First name" required auto-validate error-message=""></paper-input>
-          <paper-input class="input-box" id="lastName" name="surname" label="Last name" required auto-validate error-message=""></paper-input>
-          <paper-input class="input-box" id="email" name="contacts[0][contact][contact]" label="Email">[[ _email.contact ]]</paper-input>
-          <input name='contacts[0][contact][contactType]' value='EMail' hidden>
-          <paper-input class="input-box" id="mobile" name="contacts[1][contact][contact]" label="Mobile Number">[[ _mobile.contact ]]</paper-input>
-          <input name='contacts[1][contact][contactType]' value='Mobile' hidden>
-          <div class="horizontal center-justified layout">
-            <paper-button class="sign-up-button" raised on-tap="_signUp" id="signUpBtn">Sign up</paper-button>
-          </div>
+        <form is="iron-form" id="form" method="POST" action="/sign-up">
+          <paper-input name="clientId" label="Client ID" value="[[ clientId ]]" required hidden></paper-input>
+          <paper-input name="domainId" label="Domain ID" value="[[ domainId ]]" required hidden></paper-input>
+          <paper-input class="input-box" id="username" name="username" label="Username" value="{{ _username }}" required></paper-input>
+          <paper-input class="input-box" id="password" name="password" label="Password" type="password" value="{{ _password }}" required></paper-input>
+          <paper-input class="input-box" id="confirmPassword" label="Confirm Password" type="password" required></paper-input>
+          <paper-input class="input-box" id="firstName" name="firstName" label="First name" required></paper-input>
+          <paper-input class="input-box" id="lastName" name="lastName" label="Last name" required></paper-input>
+          <paper-input class="input-box" id="email" name="contacts[0].contact" label="Email">[[ _email.contact ]]</paper-input>
+          <paper-input name='contacts[0].contactType' value="Email" hidden></paper-input>
+          <paper-input class="input-box" id="mobile" name="contacts[1].contact" label="Mobile Number">[[ _mobile.contact ]]</paper-input>
+          <paper-input name='contacts[1].contactType' value="Mobile" hidden></paper-input>
         </form>
-        <p id="errorMessage" hidden></p>
+        <div class="horizontal center-justified layout">
+          <paper-button class="sign-up-button" raised on-tap="_signUp" id="signUpBtn">Sign up</paper-button>
+        </div>
+        <p class="horizontal center-justified layout" id="errorMessage" hidden></p>
       </paper-material>
     </div>
 
@@ -84,8 +84,11 @@ User sign up form
 
       ready: function() {
         this._domainLogo = 'http://resource.centular.com/' + this.domainId + '/logo.jpg';
-        this._email = contacts.find(this._isMail);
-        this._mobile = contacts.find(this._isMobile);
+        if (this.contacts) {
+          this._email = contacts.find(this._isMail);
+          this._mobile = contacts.find(this._isMobile);
+        }
+
       },
 
       _isMail: function(contact) {
@@ -100,6 +103,14 @@ User sign up form
         this.$.signUpBtn.disabled = true;
 
         if (!this.$.form.validate()) {
+          this.$.signUpBtn.disabled = false;
+          return;
+        }
+
+        if (this.$.password.value !== this.$.confirmPassword.value) {
+          this.$.signUpBtn.disabled = false;
+          this.$.errorMessage.innerHTML = 'Password and confirmation do not match';
+          this.$.errorMessage.hidden = false;
           return;
         }
 
