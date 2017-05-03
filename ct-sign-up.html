@@ -54,6 +54,7 @@ User sign up form
           <paper-input name='contacts[0].contactType' value="Email" hidden></paper-input>
           <paper-input class="input-box" id="mobile" name="contacts[1].contact" label="Mobile Number">[[ _mobile.contact ]]</paper-input>
           <paper-input name='contacts[1].contactType' value="Mobile" hidden></paper-input>
+          <paper-input name='invitation' value="[[ invitation ]]" hidden></paper-input>
         </form>
         <div class="horizontal center-justified layout">
           <paper-button class="sign-up-button" raised on-tap="_signUp" id="signUpBtn">Sign up</paper-button>
@@ -74,6 +75,7 @@ User sign up form
         domainId: String,
         domainName: String,
         contacts: Array,
+        invitation: String,
         next: String
       },
 
