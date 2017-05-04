@@ -48,8 +48,8 @@ User sign up form
           <paper-input class="input-box" id="username" name="username" label="Username" value="{{ _username }}" required></paper-input>
           <paper-input class="input-box" id="password" name="password" label="Password" type="password" value="{{ _password }}" required></paper-input>
           <paper-input class="input-box" id="confirmPassword" label="Confirm Password" type="password" required></paper-input>
-          <paper-input class="input-box" id="firstName" name="firstName" label="First name" required></paper-input>
-          <paper-input class="input-box" id="lastName" name="lastName" label="Last name" required></paper-input>
+          <paper-input class="input-box" id="firstName" name="firstName" label="First name" value="[[ firstName ]]" required></paper-input>
+          <paper-input class="input-box" id="lastName" name="lastName" label="Last name" value="[[ lastName ]]" required></paper-input>
           <paper-input class="input-box" id="email" name="contacts[0].contact" label="Email">[[ _email.contact ]]</paper-input>
           <paper-input name='contacts[0].contactType' value="Email" hidden></paper-input>
           <paper-input class="input-box" id="mobile" name="contacts[1].contact" label="Mobile Number">[[ _mobile.contact ]]</paper-input>
@@ -74,8 +74,9 @@ User sign up form
         clientId: String,
         domainId: String,
         domainName: String,
+        firstName: String,
+        lastName: String,
         contacts: Array,
-        invitation: String,
         next: String
       },
 
