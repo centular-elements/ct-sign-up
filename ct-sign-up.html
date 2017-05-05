@@ -50,9 +50,9 @@ User sign up form
           <paper-input class="input-box" id="confirmPassword" label="Confirm Password" type="password" required></paper-input>
           <paper-input class="input-box" id="firstName" name="firstName" label="First name" value="[[ firstName ]]" required></paper-input>
           <paper-input class="input-box" id="lastName" name="lastName" label="Last name" value="[[ lastName ]]" required></paper-input>
-          <paper-input class="input-box" id="email" name="contacts[0].contact" label="Email">[[ _email.contact ]]</paper-input>
+          <paper-input class="input-box" id="email" name="contacts[0].contact" label="Email" value="[[ _email.contact ]]"></paper-input>
           <paper-input name='contacts[0].contactType' value="Email" hidden></paper-input>
-          <paper-input class="input-box" id="mobile" name="contacts[1].contact" label="Mobile Number">[[ _mobile.contact ]]</paper-input>
+          <paper-input class="input-box" id="mobile" name="contacts[1].contact" label="Mobile Number" value="[[ _mobile.contact ]]"></paper-input>
           <paper-input name='contacts[1].contactType' value="Mobile" hidden></paper-input>
           <paper-input name='invitation' value="[[ invitation ]]" hidden></paper-input>
         </form>
@@ -86,21 +86,25 @@ User sign up form
         'iron-form-response': '_whenSignedUp'
       },
 
+      observers: ['_populateContacts(contacts)'],
+
       ready: function() {
         this._domainLogo = 'http://resource.centular.com/' + this.domainId + '/logo.jpg';
-        if (this.contacts) {
-          this._email = contacts.find(this._isMail);
-          this._mobile = contacts.find(this._isMobile);
-        }
+      },
 
+      _populateContacts: function () {
+        if (this.contacts) {
+          this._email = this.contacts.find(this._isMail);
+          this._mobile = this.contacts.find(this._isMobile);
+        }
       },
 
       _isMail: function(contact) {
-        return contact.contactType === "mail";
+        return contact.contactType === "Email";
       },
 
       _isMobile: function(contact) {
-        return contact.contactType === "mobile";
+        return contact.contactType === "Mobile";
       },
 
       _signUp: function() {
