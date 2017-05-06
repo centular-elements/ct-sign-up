@@ -128,7 +128,7 @@ User sign up form
       _whenSignUpFailed: function(event, response) {
         this.$.signUpBtn.disabled = false;
 
-        this.$.errorMessage.innerHTML = 'Something went wrong.';
+        this.$.errorMessage.innerHTML = response.request.response.message;
         this.$.errorMessage.hidden = false;
       },
 
