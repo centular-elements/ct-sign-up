@@ -5,11 +5,13 @@
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 
+<link rel="import" href="../ct-shared-styles/ct-application-theme.html">
+
 <!--
 `ct-sign-up`
 User sign up form
 
-@demo demo/index.html 
+@demo demo/index.html
 -->
 
 <dom-module id="ct-sign-up">
@@ -33,15 +35,55 @@ User sign up form
       #errorMessage {
         color: firebrick;
       }
+
+      --paper-input-container:{
+          border-top: 1px solid #ccc;
+          border-left: 1px solid #ccc;
+          border-right: 1px solid #ccc;
+          border-bottom: none;
+          padding: 0 !important;
+          margin-bottom: 24px;
+        };
+
+        --paper-input-container-input: {
+
+          margin-left: 10px;
+        };
+
+        --paper-input-container-label: {
+          margin-left: 10px;
+        };
+      }
+
+      .main-section {
+        margin-top:20px;
+      }
+
+    paper-dropdown-menu.custom-dropdown {
+      width: 100%;
+      --paper-input-container: {
+        border-top:1px solid #ccc;
+        border-left:1px solid #ccc;
+        border-right:1px solid #ccc;
+        border-bottom: none;
+        padding: 0;
+        margin-bottom: 8px;
+      };
+      --paper-input-container-input: {
+        padding-left: 10px;
+      };
+    }
     </style>
 
     <div title>
       <img class="domain-logo" src="[[ _domainLogo ]]" alt="[[ domainName ]]">
-      <p class="title">Welcome</p>
+
     </div>
 
     <div class="horizontal center-justified layout sign-up-style">
+
       <paper-material class="box" elevation="1">
+        <h4 class="text-center">User Registration</h4>
         <form is="iron-form" id="form" method="POST" action="/sign-up">
           <paper-input name="clientId" label="Client ID" value="[[ clientId ]]" required hidden></paper-input>
           <paper-input name="domainId" label="Domain ID" value="[[ domainId ]]" required hidden></paper-input>
@@ -50,9 +92,9 @@ User sign up form
           <paper-input class="input-box" id="confirmPassword" label="Confirm Password" type="password" required></paper-input>
           <paper-input class="input-box" id="firstName" name="firstName" label="First name" value="[[ firstName ]]" required></paper-input>
           <paper-input class="input-box" id="lastName" name="lastName" label="Last name" value="[[ lastName ]]" required></paper-input>
-          <paper-input class="input-box" id="email" name="contacts[0].contact" label="Email" value="[[ _email.contact ]]"></paper-input>
+          <paper-input class="input-box" id="email" name="contacts[0].contact" label="Email" value="[[ _email.contact ]]" type="email" name="email" value="" required auto-validate></paper-input>
           <paper-input name='contacts[0].contactType' value="Email" hidden></paper-input>
-          <paper-input class="input-box" id="mobile" name="contacts[1].contact" label="Mobile Number" value="[[ _mobile.contact ]]"></paper-input>
+          <paper-input class="input-box" id="mobile" allowed-pattern="[0-9 +]" name="contacts[1].contact" label="Mobile Number" value="[[ _mobile.contact ]]" ></paper-input>
           <paper-input name='contacts[1].contactType' value="Mobile" hidden></paper-input>
           <paper-input name='invitation' value="[[ invitation ]]" hidden></paper-input>
         </form>
