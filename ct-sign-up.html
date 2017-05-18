@@ -85,7 +85,8 @@ User sign up form
       .box {
           background-color: #efefef !important;
       }
-      .input-box {
+      .custom-box {
+        background: #fff;
       }
       .sign-up-button {
           background-color: steelblue;
@@ -100,7 +101,7 @@ User sign up form
 
     <div class="horizontal center-justified layout sign-up-style">
 
-      <paper-material class="box" elevation="1">
+      <paper-material class="box custom-box" elevation="1">
         <h4 class="text-center">User Registration</h4>
         <form is="iron-form" id="form" method="POST" action="/sign-up">
           <paper-input name="clientId" label="Client ID" value="[[ clientId ]]" required hidden></paper-input>
