@@ -19,6 +19,27 @@ User sign up form
     <style include="iron-flex iron-flex-alignment sign-up-style">
       :host {
         display: block;
+        --paper-input-container:{
+            border-top: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            border-bottom: none;
+            padding: 0 !important;
+            margin-bottom: 24px;
+          };
+
+          --paper-input-container-input: {
+
+            margin-left: 10px;
+          };
+
+          --paper-input-container-label: {
+            margin-left: 10px;
+          };
+        }
+
+      body {
+
       }
       div[title] {
         text-align: center;
@@ -36,24 +57,7 @@ User sign up form
         color: firebrick;
       }
 
-      --paper-input-container:{
-          border-top: 1px solid #ccc;
-          border-left: 1px solid #ccc;
-          border-right: 1px solid #ccc;
-          border-bottom: none;
-          padding: 0 !important;
-          margin-bottom: 24px;
-        };
 
-        --paper-input-container-input: {
-
-          margin-left: 10px;
-        };
-
-        --paper-input-container-label: {
-          margin-left: 10px;
-        };
-      }
 
       .main-section {
         margin-top:20px;
@@ -79,7 +83,7 @@ User sign up form
           font-size: 1.2em;
       }
       .box {
-          background-color: white;
+          background-color: #efefef !important;
       }
       .input-box {
       }
