@@ -16,7 +16,7 @@ User sign up form
 
 <dom-module id="ct-sign-up">
   <template>
-    <style include="iron-flex iron-flex-alignment sign-up-style">
+    <style is="custom-style" include="iron-flex iron-flex-alignment sign-up-style">
       :host {
         display: block;
         --paper-input-container:{
@@ -36,6 +36,12 @@ User sign up form
           --paper-input-container-label: {
             margin-left: 10px;
           };
+          .box {
+              background-color: #fff !important;
+          }
+          .custom-box {
+            background-color: #fff !important;
+          }
         }
 
       body {
@@ -83,7 +89,7 @@ User sign up form
           font-size: 1.2em;
       }
       .box {
-          background-color: #efefef !important;
+          background-color: #fff !important;
       }
       .custom-box {
         background: #fff;
