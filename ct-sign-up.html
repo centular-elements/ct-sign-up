@@ -103,13 +103,14 @@ User sign up form
     }
     </style>
 
-    <div title>
-      <img class="domain-logo" src="[[ _domainLogo ]]" alt="[[ domainName ]]">
-    </div>
+
 
     <div class="horizontal center-justified layout sign-up-style">
 
       <paper-material class="box custom-box" elevation="1">
+        <div title>
+          <img class="domain-logo" src="[[ _domainLogo ]]" alt="[[ domainName ]]">
+        </div>
         <h4 class="text-center">User Registration</h4>
         <form is="iron-form" id="form" method="POST" action="/sign-up">
           <paper-input name="clientId" label="Client ID" value="[[ clientId ]]" required hidden></paper-input>
